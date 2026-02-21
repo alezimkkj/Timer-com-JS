@@ -5,7 +5,7 @@ const resetButton = document.querySelector('#resetButton');
 const pauseButton = document.querySelector('#pauseButton');
 
 // Inicio
-let timer, minutos, segundos;
+let minutos, segundos;
 let timerRunning = false;
 let repeat = null;
 
@@ -31,7 +31,6 @@ function restartTimer() {
 
     segundos = 0;
     minutos = 0;
-    timer = '00:00';
 
     timerRunning = false;
 
@@ -57,16 +56,14 @@ function updateTimer() {
                 segundos = 0;
             }
 
-            let segundosElement = segundos < 10 ? `0${segundos}` : segundos;
-            let minutosElement = minutos < 10 ? `0${minutos}` : minutos;
-
-            timer = `${minutosElement}:${segundosElement}`;
-
             showTimer();
         }, 1000);
     }
 }
 
 function showTimer() {
-    timerElement.innerHTML = timer;
+     let segundosElement = segundos < 10 ? `0${segundos}` : segundos;
+    let minutosElement = minutos < 10 ? `0${minutos}` : minutos;
+
+    timerElement.innerHTML = `${minutosElement}:${segundosElement}`;
 }
