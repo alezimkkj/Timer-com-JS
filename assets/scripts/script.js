@@ -5,7 +5,7 @@ const resetButton = document.querySelector('#resetButton');
 const pauseButton = document.querySelector('#pauseButton');
 
 // Inicio
-let timer, minutos, segundos, minutosElement, segundosElement;
+let timer, minutos, segundos;
 let timerRunning = false;
 let repeat = null;
 
@@ -13,55 +13,57 @@ restartTimer();
 
 // Eventos
 startButton.addEventListener('click', startTimer);
-    //resetButton.addEventListener('click', restartTimer);
-    //pauseButton.addEventListener('click', pauseTimer);
+resetButton.addEventListener('click', restartTimer);
+pauseButton.addEventListener('click', pauseTimer);
 
 // Funções
 function startTimer() {
     if(!timerRunning) {
         timerRunning = true;
+
         updateTimer();
     }
 }
 
 function restartTimer() {
+    clearInterval(repeat);
+    repeat = null;
+
     segundos = 0;
     minutos = 0;
+    timer = '00:00';
 
-    updateTimer();
+    timerRunning = false;
+
+    showTimer();
 }
 
 function pauseTimer() {
+    clearInterval(repeat);
+    repeat = null;
     
+    timerRunning = false;
+
+    showTimer();
 }
 
 function updateTimer() {
-    if(timerRunning && !repeat) {
+    if(timerRunning && repeat == null) {
         repeat = setInterval(() => {
-            segundos += 1;
+            segundos ++;
 
             if(segundos == 60) {
-                minutos += 1;
-
+                minutos ++;
                 segundos = 0;
             }
 
-            segundosElement = segundos;
-            minutosElement = minutos;
-
-            if(segundos < 10) {
-                segundosElement = `0${segundos}`;
-            }
-            if(minutos < 10) {
-                minutosElement = `0${minutos}`;
-            }
+            let segundosElement = segundos < 10 ? `0${segundos}` : segundos;
+            let minutosElement = minutos < 10 ? `0${minutos}` : minutos;
 
             timer = `${minutosElement}:${segundosElement}`;
 
             showTimer();
         }, 1000);
-    } else {
-        clearInterval(repeat);
     }
 }
 
