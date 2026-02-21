@@ -5,8 +5,9 @@ const resetButton = document.querySelector('#resetButton');
 const pauseButton = document.querySelector('#pauseButton');
 
 // Inicio
-let timer, minutos, segundos;
+let timer, minutos, segundos, minutosElement, segundosElement;
 let timerRunning = false;
+let repeat = null;
 
 restartTimer();
 
@@ -17,12 +18,17 @@ startButton.addEventListener('click', startTimer);
 
 // Funções
 function startTimer() {
-    timerRunning = true;
-    updateTimer();
+    if(!timerRunning) {
+        timerRunning = true;
+        updateTimer();
+    }
 }
 
 function restartTimer() {
-    
+    segundos = 0;
+    minutos = 0;
+
+    updateTimer();
 }
 
 function pauseTimer() {
@@ -30,9 +36,7 @@ function pauseTimer() {
 }
 
 function updateTimer() {
-    let repeat;
-
-    if(timerRunning) {
+    if(timerRunning && !repeat) {
         repeat = setInterval(() => {
             segundos += 1;
 
@@ -54,12 +58,10 @@ function updateTimer() {
 
             timer = `${minutosElement}:${segundosElement}`;
 
-        showTimer();
+            showTimer();
         }, 1000);
-        
-        if(!timerRunning) {
-            clearInterval(repeat);
-        }
+    } else {
+        clearInterval(repeat);
     }
 }
 
