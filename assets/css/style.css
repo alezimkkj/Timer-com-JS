@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
+body.dark {
+    --bg-color: #0e0e0e;
+    --text-color: #fff; 
+}
+
+body.white {
+    --bg-color: #FAF9F6;
+    --text-color: #000;
+}
+
 * {
     box-sizing: border-box;
     padding: 0;
@@ -7,14 +17,15 @@
     font-family: "Rajdhani", sans-serif;
 }
 
+/* Estilos do Timer */
 main {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #0e0e0e;
-    color: #fff;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 .timerArea {
@@ -30,18 +41,55 @@ main {
 
 .timerOptions button {
     background-color: transparent;
-    color: #fff;
+    color: var(--text-color);
     font-size: 1.5rem;
     font-weight: 600;
     text-transform: uppercase;
     padding: 10px 20px;
-    border: 2px solid #fff;
+    border: 2px solid var(--text-color);
     border-radius: 20px;
     cursor: pointer;
     transition: .3s;
 }
 
 .timerOptions button:hover {
-    background-color: #fff;
+    background-color: var(--text-color);
     color: #0e0e0e; 
+}
+
+/* Estilos dos Temas */
+.themesOptions {
+    background-color: var(--text-color);
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    gap: 10px;
+    padding: 5px;
+    border-radius: 50px;
+}
+
+.themesOptions button {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    padding: 14px 15px;
+    border-radius: 50%;
+    border: 0;
+    cursor: pointer;
+    animation: ease-in-out;
+    transition: .3s;
+}
+
+.themesOptions button.active,
+.themesOptions button:hover {
+    background-color: var(--bg-color);
+    i {
+        color: var(--text-color);
+    }
+}
+
+.themesOptions button i {
+    color: var(--bg-color);
+    font-size: 20px;
 }
